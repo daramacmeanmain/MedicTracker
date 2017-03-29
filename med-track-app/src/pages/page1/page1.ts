@@ -20,7 +20,7 @@ export class Page1 {
    }
 
    load(){
-     this.http.get('http://51.141.26.155/test.php')
+     this.http.get('http://51.141.24.34/test.php')
       .map(res => res.json())
       .subscribe(data =>
       {

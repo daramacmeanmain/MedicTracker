@@ -9,11 +9,14 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class Page2 {
   public form : FormGroup;
-  public testWord : String;
-  public testNum : number;
-  private baseURI : String  = "http://51.141.26.155/";
+  public testWord : any;
+  public testNum : any;
+  private baseURI : String  = "http://51.141.24.34/";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public http: Http,
+              public fb: FormBuilder) {
     this.form = fb.group({
       "word": ["", Validators.required],
       "num": ["", Validators.required]
@@ -26,9 +29,9 @@ export class Page2 {
       this.testNum = item.num;
    }
 
-   testPost(testWord, testNum)
+   createPost(word, num)
   {
-    let body: String = "key=create&word" + testWord + "&num" + testNum,
+    let body: String = "key=create&word=" + word + "&num=" + num,
         type: String = "application/x-www-form-urlencoded; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers }),
@@ -36,6 +39,14 @@ export class Page2 {
 
     this.http.post(url, body, options).subscribe((data) => {});
     
+  }
+
+  savePost()
+  {
+    let word     	: string	= this.form.controls["word"].value,
+        num	: string 	= this.form.controls["num"].value;
+
+        this.createPost(word, num);
   }
 
   itemTapped(event, item) {
