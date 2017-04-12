@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, ModalController, NavParams, Platform, ViewController } from 'ionic-angular';
+import { AddMedPage } from '../add-med/add-med';
+
 
 @Component({
   selector: 'page-page2',
@@ -9,29 +11,41 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class Page2 {
   public form : FormGroup;
-  public testWord : any;
-  public testNum : any;
+  public userName : any;
+  public medName : any;
+  public medDose : any;
+  public medFrq : any;
   private baseURI : String  = "http://51.141.24.34/";
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public http: Http,
-              public fb: FormBuilder) {
+              public fb: FormBuilder,
+              public modalCtrl: ModalController) {
     this.form = fb.group({
-      "word": ["", Validators.required],
-      "num": ["", Validators.required]
+      "name": ["", Validators.required],
+      "med": ["", Validators.required],
+      "dose": ["", Validators.required],
+      "frq": ["", Validators.required]
     })
+  }
+
+  addMedication(){
+    let addMedModal = this.modalCtrl.create(AddMedPage);  
+    addMedModal.present();
   }
 
   selectPost(item)
    {
-      this.testWord = item.word;
-      this.testNum = item.num;
+      this.userName = item.name;
+      this.medName = item.med;
+      this.medDose = item.dose;
+      this.medFrq = item.frq;
    }
 
-   createPost(word, num)
+   createPost(name, med, dose, frq)
   {
-    let body: String = "key=create&word=" + word + "&num=" + num,
+    let body: String = "key=create&word=" + name + "&num=" + med,
         type: String = "application/x-www-form-urlencoded; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers }),
@@ -43,10 +57,12 @@ export class Page2 {
 
   savePost()
   {
-    let word     	: string	= this.form.controls["word"].value,
-        num	: string 	= this.form.controls["num"].value;
+    let name : string	= this.form.controls["name"].value,
+        med	: string 	= this.form.controls["med"].value,
+        dose : string	= this.form.controls["dose"].value,
+        frq	: string 	= this.form.controls["frq"].value;
 
-        this.createPost(word, num);
+        this.createPost(name, med, dose, frq);
   }
 
   itemTapped(event, item) {

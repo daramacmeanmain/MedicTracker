@@ -13,11 +13,11 @@
       <ion-list>
 
     <ion-item>
-      <ion-input type="text" placeholder="Name" formControlName="word" [(ngModel)]="testWord"></ion-input>
+      <ion-input type="text" placeholder="Name" formControlName="name" [(ngModel)]="userName"></ion-input>
     </ion-item>
 
     <ion-item>
-       <ion-input type="number" placeholder="Number" formControlName="num" [(ngModel)]="testNum"></ion-input>
+       <button ion-button (click)="addMedication()">Add new</button>
     </ion-item>
 
      <ion-item>

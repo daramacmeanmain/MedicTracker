@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Page2 } from '../page2/page2';
 
 @Component({
   selector: 'page-page1',
@@ -9,13 +10,13 @@ import 'rxjs/add/operator/map';
 })
 export class Page1 {
   
+  page2 = Page2;
   public items: any = [];
   constructor(public navCtrl: NavController, public http: Http) {
-    
+    //this.navCtrl.push(Page2)
   }
 
-  ionViewWillEnter()
-   {
+  ionViewWillEnter(){
       this.load();
    }
 
