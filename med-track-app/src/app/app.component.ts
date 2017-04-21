@@ -5,6 +5,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { AddMedPage } from '../pages/add-med/add-med';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
 
 
 @Component({
@@ -22,8 +23,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Create Profile', component: Page1 },
-      { title: 'Manage Active Profile', component: Page2 }
+      { title: 'Add Prescription', component: AddMedPage },
+      { title: 'Profile', component: UserProfilePage }
     ];
 
   }

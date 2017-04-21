@@ -8,13 +8,31 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Welcome</h3>
+  <h3 text-center>Welcome to MedicTracker!</h3>
 
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
+  <p text-center>
+    Create a profile or log in to start keeping track of your prescriptions.
   </p>
 
-  <button ion-button color = "light" [navPush]="page2">Create Profile</button>
-  <button ion-button color = "light">Log In</button>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="saveLogin()">
+      <ion-list center>
+
+    <ion-item>
+      <ion-input type="text" placeholder="E-Mail Adress" formControlName="email" [(ngModel)]="userEmail"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="userPassword"></ion-input>
+    </ion-item>
+
+    </ion-list>
+
+       <button ion-button color="primary" text-center block [disabled]="!form.valid">Log In</button>
+       <br>
+       <button ion-button color="primary" text-center block [navPush]="page2">Create Profile</button>
+
+</form>
+  </div>
 </ion-content>

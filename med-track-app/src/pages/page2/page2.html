@@ -3,13 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Page Two</ion-title>
+    <ion-title>Create Profile</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <div>
-   <form [formGroup]="form" (ngSubmit)="savePost()">
+   <form [formGroup]="form" (ngSubmit)="saveUser()">
       <ion-list>
 
     <ion-item>
@@ -17,14 +17,22 @@
     </ion-item>
 
     <ion-item>
-       <button ion-button (click)="addMedication()">Add new</button>
+      <ion-input type="text" placeholder="E-Mail Adress" formControlName="email" [(ngModel)]="userEmail"></ion-input>
     </ion-item>
 
-     <ion-item>
-       <button ion-button color="primary" text-center block [disabled]="!form.valid">Submit</button>
-      </ion-item>
+    <ion-item>
+      <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="userPass"></ion-input>
+    </ion-item>
+<!--
+    <ion-item>
+      <ion-input type="text" placeholder="Confirm Password" formControlName="confirm" [(ngModel)]="userConfirm"></ion-input>
+    </ion-item>
+-->
+    </ion-list>
 
-</ion-list>
+       <button ion-button color="primary" text-center block [disabled]="!form.valid">Continue</button>
+
+
 </form>
  </div>
 </ion-content>
