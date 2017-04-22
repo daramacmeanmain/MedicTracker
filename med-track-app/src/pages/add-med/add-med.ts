@@ -17,22 +17,39 @@ import { UserProfilePage } from '../user-profile/user-profile';
 })
 export class AddMedPage {
   public form : FormGroup;
+  public items: any = [];
   public medName : any;
   public medDose : any;
   public medFrq : any;
+  public uId : any;
+  public userId : number;
   private baseURI : String  = "http://51.141.24.34/";
   
   constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder) {
     this.form = fb.group({
       "med": [""],
       "dose": [""],
-      "frq": [""]
+      "frq": [""],
+      "uid": [""]
     })
   }
 
-  createMed(med, dose, frq)
+  ionViewWillEnter(){
+      this.loadId();
+   }
+
+  loadId(){
+     this.http.get('http://51.141.24.34/getUid.php')
+      .map(res => res.json())
+      .subscribe(data =>
+      {
+         this.items = data;
+      });
+   }
+
+  createMed(med, dose, frq, uid)
   {
-    let body: String = "key=create&med=" + med + "&dose=" + dose + "&frq=" + frq,
+    let body: String = "key=create&med=" + med + "&dose=" + dose + "&frq=" + frq + "&uid=" + uid,
         type: String = "application/x-www-form-urlencoded; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers }),
@@ -47,14 +64,18 @@ export class AddMedPage {
       this.medName = item.med;
       this.medDose = item.dose;
       this.medFrq = item.frq;
+      this.userId = item.uid;
    }
 
   saveMed(){
     let med	: string 	= this.form.controls["med"].value,
         dose : string	= this.form.controls["dose"].value,
-        frq	: string 	= this.form.controls["frq"].value;
+        frq	: string 	= this.form.controls["frq"].value,
+        uid	: string 	= this.form.controls["uid"].value;
 
-    this.createMed(med, dose, frq);
+    //console.log(this.loadId().userId);
+
+    this.createMed(med, dose, frq, uid);
     this.navCtrl.push(UserProfilePage);
   }
 

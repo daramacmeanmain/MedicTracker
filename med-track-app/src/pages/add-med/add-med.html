@@ -29,9 +29,16 @@
        <ion-input type="number" placeholder="Number of Times per Day" formControlName="frq" [(ngModel)]="medFrq"></ion-input>
     </ion-item>
 
+    <ion-item *ngFor="let item of items">
+        <ion-select placeholder="Confirm Your ID" formControlName="uid" [(ngModel)]="userId">
+          <ion-option>{{ item.id }}</ion-option>
+        </ion-select>
+      </ion-item>
+
     <ion-item>
        <button ion-button color="primary" text-center block [disabled]="!form.valid" (click)="saveMed()">Finish</button>
       </ion-item>
+
       </ion-list>
     </form>
   </div>

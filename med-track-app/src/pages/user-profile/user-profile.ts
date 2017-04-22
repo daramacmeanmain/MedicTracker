@@ -15,19 +15,30 @@ import { Http } from '@angular/http';
 export class UserProfilePage {
 
   public items: any = [];
+  public uItems: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {}
 
   ionViewWillEnter(){
       this.load();
+      this.loadName();
    }
 
    load(){
-     this.http.get('http://51.141.24.34/getData.php')
+     this.http.get('http://51.141.24.34/login.php')
       .map(res => res.json())
       .subscribe(data =>
       {
          this.items = data;
+      });
+   }
+
+   loadName(){
+     this.http.get('http://51.141.24.34/getName.php')
+      .map(res => res.json())
+      .subscribe(data =>
+      {
+         this.uItems = data;
       });
    }
 

@@ -5,19 +5,20 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Your Profile</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-row *ngFor="let uItem of uItems">
+        <ion-title>{{ uItem.name }}'s Profile</ion-title>
+    </ion-row>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
   <ion-item *ngFor="let item of items">
-    <p>{{ item.name }}</p>
-    <p>{{ item.med }}</p>
-    <p>{{ item.dose }}</p>
-    <p>{{ item.frq }}</p>
+    <p>Medication Name: {{ item.med }}</p>
+    <p>Dosage: {{ item.dose }} Every {{ item.frq }} Hours</p>
   </ion-item>
 </ion-content>
