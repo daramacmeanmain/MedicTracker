@@ -17,8 +17,8 @@
 
 
 <ion-content padding>
-  <ion-item *ngFor="let item of items">
-    <p>Medication Name: {{ item.med }}</p>
-    <p>Dosage: {{ item.dose }} Every {{ item.frq }} Hours</p>
+  <ion-item *ngFor="let item of items" (click)="presentActionSheet()">
+    <ion-item class="item">Medication Name: {{ item.med }}</ion-item>
+    <ion-item class="item">Dosage: {{ item.dose }} Every {{ item.frq }} Hours</ion-item>
   </ion-item>
 </ion-content>
