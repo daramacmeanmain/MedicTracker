@@ -5,8 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Add New Prescription</ion-title>
   </ion-navbar>
 
@@ -36,7 +38,7 @@
       </ion-item>
 
     <ion-item>
-       <button ion-button color="primary" text-center block [disabled]="!form.valid" (click)="saveMed()">Finish</button>
+       <button ion-button color="primary" text-center block [disabled]="!form.valid" [navPush]="userProfile" (click)="saveMed()">Finish</button>
       </ion-item>
 
       </ion-list>

@@ -24,6 +24,8 @@ export class AddMedPage {
   public uId : any;
   public userId : number;
   private baseURI : String  = "http://51.141.24.34/";
+
+  userProfile = UserProfilePage;
   
   constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder) {
     this.form = fb.group({
@@ -76,7 +78,6 @@ export class AddMedPage {
     //console.log(this.loadId().userId);
 
     this.createMed(med, dose, frq, uid);
-    this.navCtrl.push(UserProfilePage);
   }
 
   reload(){

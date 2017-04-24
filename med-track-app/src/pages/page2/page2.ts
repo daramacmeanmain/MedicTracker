@@ -13,8 +13,8 @@ import { Page1 } from  '../page1/page1';
 export class Page2 {
   public data: any = "";
   public form : FormGroup;
+  public uName : any;
   public userName : any;
-  public userEmail : any;
   public userPass : any;
   //public userConfirm : any;
   private baseURI : String  = "http://51.141.24.34/";
@@ -22,7 +22,7 @@ export class Page2 {
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder, public modalCtrl: ModalController) {
     this.form = fb.group({
       "name": [""],
-      "email": [""],
+      "username": [""],
       "password": [""]
     })
   }
@@ -37,14 +37,14 @@ export class Page2 {
 
   setUser(item)
    {
-      this.userName = item.name;
-      this.userEmail = item.email;
+      this.uName = item.name;
+      this.userName = item.username;
       this.userPass = item.password;
    }
 
-   createUser(name, email, password)
+   createUser(name, username, password)
   {
-    let body: String = "key=create&name=" + name + "&email=" + email + "&password=" + password,
+    let body: String = "key=create&name=" + name + "&username=" + username + "&password=" + password,
         type: String = "application/x-www-form-urlencoded; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers }),
@@ -57,17 +57,17 @@ export class Page2 {
   saveUser()
   {
     let name : string	= this.form.controls["name"].value,
-        email : string	= this.form.controls["email"].value,
+        username : string	= this.form.controls["username"].value,
         password : string	= this.form.controls["password"].value;
 
-        this.createUser(name, email, password);
+        this.createUser(name, username, password);
         this.navCtrl.push(Page1);
   }
 
-  itemTapped(event, item) {
+  /*itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(Page2, {
       item: item
-    });
-  }
+    });*/
+  //}
 }

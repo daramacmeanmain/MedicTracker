@@ -1,8 +1,8 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+  <ion-navbar hideBackButton>
+    <!--<button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </button>-->
     <ion-title>MedicTracker</ion-title>
   </ion-navbar>
 </ion-header>
@@ -15,24 +15,26 @@
     Create a profile or log in to start keeping track of your prescriptions.
   </p>
 
-  <div>
-    <form [formGroup]="form" (ngSubmit)="saveLogin()" method="POST">
-      <ion-list center>
+<div>
+  <form [formGroup]="form" (ngSubmit)="saveLogin()" method="POST">
+    <ion-list center>
 
     <ion-item>
-      <ion-input type="text" placeholder="E-Mail Adress" formControlName="email" [(ngModel)]="userEmail"></ion-input>
+      <ion-input type="text" placeholder="Username" required formControlName="username" [(ngModel)]="userName"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="userPassword"></ion-input>
+      <ion-input type="password" placeholder="Password" required formControlName="password" [(ngModel)]="userPassword"></ion-input>
     </ion-item>
 
+    <ion-item>
+      <button ion-button color="primary" text-center block [disabled]="!form.valid">Log In</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button color="primary" text-center block [navPush]="page2">Create Profile</button>
+    </ion-item>
     </ion-list>
 
-       <button ion-button color="primary" text-center block [disabled]="!form.valid">Log In</button>
-       <br>
-       <button ion-button color="primary" text-center block [navPush]="page2">Create Profile</button>
-
-</form>
-  </div>
+  </form>
+</div>
 </ion-content>

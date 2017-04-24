@@ -13,26 +13,29 @@ import { UserProfilePage } from '../user-profile/user-profile';
 export class Page1 {
 
   public form : FormGroup;
-  public userEmail : any;
+  public userName : any;
   public userPassword : any;
   private baseURI : String  = "http://51.141.24.34/";
   
   page2 = Page2;
+  userProfile = UserProfilePage;
+  
   public items: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder) {
     this.form = fb.group({
-      "email": [""],
+      "username": [""],
       "password": [""]
     })
   }
 
    setLogIn(item){
-    this.userEmail = item.email;
+    this.userName = item.username;
+    this.userPassword = item.password;
   }
 
-   logInUser(email, password)
+   logInUser(username, password)
   {
-    let body: String = "key=create&email=" + email + "&password=" + password,
+    let body: String = "key=create&username=" + username + "&password=" + password,
         type: String = "application/x-www-form-urlencoded; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers }),
@@ -43,10 +46,10 @@ export class Page1 {
   }
 
   saveLogin(){
-    let email : string	= this.form.controls["email"].value,
+    let username : string	= this.form.controls["username"].value,
         password : string	= this.form.controls["password"].value;
 
-    this.logInUser(email, password);
+    this.logInUser(username, password);
     this.navCtrl.push(UserProfilePage);
   }
 
