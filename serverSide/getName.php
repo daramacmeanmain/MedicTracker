@@ -2,6 +2,7 @@
 	session_start();
 	header('Access-Control-Allow-Origin: *');
 	
+	// Define database connection parameters
 	$hn 		= 'localhost';
 	$un 		= 'root';
 	$pwd		= '';
@@ -24,16 +25,16 @@
 	$pdo 	= new PDO($dsn, $un, $pwd, $opt);
 	$data   = array();
 	
-	if (isset($_REQUEST['email'])){
-		$_SESSION['session_email'] = $_REQUEST['email'];
+	if (isset($_REQUEST['username'])){
+		$_SESSION['session_username'] = $_REQUEST['username'];
 	}
 		
 	if (isset($_REQUEST['password'])){
 		$_SESSION['session_password'] = $_REQUEST['password'];
 	}
 
-	if (isset($_SESSION['session_email'])){
-		$email = $_SESSION['session_email'];
+	if (isset($_SESSION['session_username'])){
+		$username = $_SESSION['session_username'];
 	}
 
 	if (isset($_SESSION['session_password'])){
@@ -41,12 +42,12 @@
 	}
 	
 	try {
-	  $stmt 	= $pdo->query("select name from user_table where email = '$email' and password = '$password'");
+	  $stmt 	= $pdo->query("select name from user_table where username = '$username' and password = '$password'");
 	  while($row  = $stmt->fetch(PDO::FETCH_OBJ))
 	  {
 		 $uData[] = $row;
 	  }
-	  
+
 	  echo json_encode($uData);
 	}
 	catch(PDOException $e)
