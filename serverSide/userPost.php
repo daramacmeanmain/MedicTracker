@@ -19,18 +19,18 @@
 	$data 	= array();
 
 	$name = filter_var($_REQUEST['name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-	$email = filter_var($_REQUEST['email'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+	$username = filter_var($_REQUEST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	$password = filter_var($_REQUEST['password'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	
 	try {
-		$sql 	= "INSERT INTO user_table(name, email, password) VALUES(:name, :email, :password)";
+		$sql 	= "INSERT INTO user_table(name, username, password) VALUES(:name, :username, :password)";
 		$stmt 	= $pdo->prepare($sql);
 		$stmt->bindParam(':name', $name, PDO::PARAM_STR);
-		$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+		$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 		$stmt->bindParam(':password', $password, PDO::PARAM_STR);
 		$stmt->execute();
 	}
-
+	
 	catch(PDOException $e)
 	{
 		echo $e->getMessage();

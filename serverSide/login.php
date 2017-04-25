@@ -24,16 +24,16 @@
 	$pdo 	= new PDO($dsn, $un, $pwd, $opt);
 	$data   = array();
 	
-	if (isset($_REQUEST['email'])){
-		$_SESSION['session_email'] = $_REQUEST['email'];
+	if (isset($_REQUEST['username'])){
+		$_SESSION['session_username'] = $_REQUEST['username'];
 	}
 		
 	if (isset($_REQUEST['password'])){
 		$_SESSION['session_password'] = $_REQUEST['password'];
 	}
 
-	if (isset($_SESSION['session_email'])){
-		$email = $_SESSION['session_email'];
+	if (isset($_SESSION['session_username'])){
+		$username = $_SESSION['session_username'];
 	}
 
 	if (isset($_SESSION['session_password'])){
@@ -41,7 +41,7 @@
 	}
 	
 	try {
-	  $stmt 	= $pdo->query("select med_table.med, med_table.dose, round(12/med_table.frq) as frq from user_table inner join med_table on med_table.user_id = user_table.id where user_table.email = '$email' and user_table.password = '$password'");
+	  $stmt 	= $pdo->query("select med_table.med, med_table.dose, round(12/med_table.frq) as frq from user_table inner join med_table on med_table.user_id = user_table.id where user_table.username = '$username' and user_table.password = '$password'");
 	  while($row  = $stmt->fetch(PDO::FETCH_OBJ))
 	  {
 		 $data[] = $row;
