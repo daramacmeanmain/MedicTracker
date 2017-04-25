@@ -5,6 +5,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Page2 } from '../page2/page2';
 import { UserProfilePage } from '../user-profile/user-profile';
+import { Platform } from 'ionic-angular';
 
 @Component({
   selector: 'page-page1',
@@ -21,11 +22,15 @@ export class Page1 {
   userProfile = UserProfilePage;
   
   public items: any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder) {
+  constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder) {
     this.form = fb.group({
       "username": [""],
       "password": [""]
     })
+    
+    platform.registerBackButtonAction(() => {
+        this.platform.exitApp();
+    });
   }
 
    setLogIn(item){

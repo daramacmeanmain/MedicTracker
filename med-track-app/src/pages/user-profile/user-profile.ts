@@ -47,6 +47,13 @@ export class UserProfilePage {
       });
    }
 
+   logout(){
+     this.http.get('http://51.141.24.34/logout.php')
+      .map(res => res.json())
+      .subscribe(data =>
+      {});
+   }
+
    loadName(){
      this.http.get('http://51.141.24.34/getName.php')
       .map(res => res.json())
@@ -132,6 +139,7 @@ export class UserProfilePage {
          handler: () => {
            console.log('out clicked');
            this.navCtrl.push(Page1);
+           this.logout();
          }
        },
        {
@@ -171,6 +179,13 @@ export class UserProfilePage {
       ],
       buttons: [
         {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
           text: 'Confirm',
           handler: data => {
               let med : string = data.mEdit,
@@ -182,13 +197,6 @@ export class UserProfilePage {
 
                   this.editMed(med, nMed, dose, frq, username, uid);
                   this.navCtrl.push(UserProfilePage, {username});
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
           }
         }
       ]
