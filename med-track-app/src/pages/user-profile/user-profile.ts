@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ActionSheetController, AlertController } from 'ionic-angular'
 import { Http, RequestOptions, Headers } from '@angular/http';
+import { Page1 } from  '../page1/page1';
 
 /*
   Generated class for the UserProfile page.
@@ -17,13 +18,20 @@ export class UserProfilePage {
 
   public items: any = [];
   public uItems: any = [];
+  public idItems: any = [];
   public medName: any;
+  public newMed: any;
   public medDose: any;
   public medFrq: any;
   public userId: any;
+  public userIdCheck: any;
+  public userName: string;
   private baseURI : String  = "http://51.141.24.34/"; 
 
-  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams, public http: Http) {}
+  constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+    this.userName = this.navParams.get('username');
+    this.userId = this.navParams.get('uid');
+  }
 
   ionViewWillEnter(){
       this.load();
@@ -48,9 +56,21 @@ export class UserProfilePage {
       });
    }
 
-   editMed(med, dose, frq, uid)
+   loadId(){
+     this.http.get('http://51.141.24.34/getUid.php')
+      .map(res => res.json())
+      .subscribe(data =>
+      {
+         this.idItems = data;
+         for(let idItem of this.idItems){
+           this.userIdCheck = idItem;
+         }
+      });
+   }
+
+   editMed(med, nMed, dose, frq, username, uid)
   {
-    let body: String = "key=create&med=" + med + "&dose=" + dose + "&frq=" + frq + "&uid=" + uid,
+    let body: String = "key=create&med=" + med + "&nMed=" + nMed + "&dose=" + dose + "&frq=" + frq + "&username=" + username + "&uid=" + uid,
         type: String = "application/x-www-form-urlencoded; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers }),
@@ -62,9 +82,9 @@ export class UserProfilePage {
     
   }
 
-  delMed(med, uid)
+  delMed(med, username, uid)
   {
-    let body: String = "key=create&med=" + med + "&uid=" + uid,
+    let body: String = "key=create&med=" + med + "&username=" + username + "&uid=" + uid,
         type: String = "application/x-www-form-urlencoded; charset=UTF-8",
         headers: any = new Headers({ 'Content-Type': type}),
         options: any = new RequestOptions({ headers: headers }),
@@ -79,8 +99,10 @@ export class UserProfilePage {
   setMed(item)
    {
       this.medName = item.med;
+      this.newMed = item.nMed;
       this.medDose = item.dose;
       this.medFrq = item.frq;
+      this.userName = item.username;
       this.userId = item.uid;
    }
 
@@ -105,6 +127,14 @@ export class UserProfilePage {
          }
        },
        {
+         text: 'Logout',
+         role: 'out',
+         handler: () => {
+           console.log('out clicked');
+           this.navCtrl.push(Page1);
+         }
+       },
+       {
          text: 'Cancel',
          role: 'cancel',
          handler: () => {
@@ -124,7 +154,11 @@ export class UserProfilePage {
       inputs: [
         {
           name: 'mEdit',
-          placeholder: 'Medication'
+          placeholder: 'Medication to Edit'
+        },
+        {
+          name: 'newEdit',
+          placeholder: 'New Medication Name'
         },
         {
           name: 'dEdit',
@@ -133,10 +167,6 @@ export class UserProfilePage {
         {
           name: 'fEdit',
           placeholder: 'Number of Times per Day'
-        },
-        {
-          name: 'uEdit',
-          placeholder: 'ID'
         }
       ],
       buttons: [
@@ -144,11 +174,14 @@ export class UserProfilePage {
           text: 'Confirm',
           handler: data => {
               let med : string = data.mEdit,
+                  nMed: string = data.newEdit,
                   dose : string = data.dEdit,
                   frq : string = data.fEdit,
-                  uid : string = data.uEdit
+                  username: string = this.userName,
+                  uid: string = this.userId
 
-                  this.editMed(med, dose, frq, uid);
+                  this.editMed(med, nMed, dose, frq, username, uid);
+                  this.navCtrl.push(UserProfilePage, {username});
           }
         },
         {
@@ -172,10 +205,6 @@ export class UserProfilePage {
         {
           name: 'mDelete',
           placeholder: 'Medication'
-        },
-        {
-          name: 'uDelete',
-          placeholder: 'ID'
         }
       ],
       buttons: [
@@ -190,9 +219,11 @@ export class UserProfilePage {
           text: 'Confirm',
           handler: data => {
            let med : string = data.mDelete,
-               uid : string = data.uDelete;
+               username: string = this.userName,
+               uid: string = this.userId
 
-               this.delMed(med, uid);
+               this.delMed(med, username, uid);
+               this.navCtrl.push(UserProfilePage, {username});
           }
         },
       ]

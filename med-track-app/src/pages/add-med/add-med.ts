@@ -78,10 +78,11 @@ export class AddMedPage {
     //console.log(this.loadId().userId);
 
     this.createMed(med, dose, frq, uid);
+    this.navCtrl.push(UserProfilePage, {uid});
   }
 
   reload(){
-     this.navCtrl.push(AddMedPage);
+     
   }
 
   ionViewDidLoad() {

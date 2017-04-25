@@ -50,7 +50,7 @@ export class Page1 {
         password : string	= this.form.controls["password"].value;
 
     this.logInUser(username, password);
-    this.navCtrl.push(UserProfilePage);
+    this.navCtrl.push(UserProfilePage, {username});
   }
 
 }

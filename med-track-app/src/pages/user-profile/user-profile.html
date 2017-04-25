@@ -12,12 +12,17 @@
     <ion-row *ngFor="let uItem of uItems">
         <ion-title>{{ uItem.name }}'s Profile</ion-title>
     </ion-row>
+    <ion-buttons end>
+      <button ion-button (click)="presentActionSheet()">
+        <ion-icon name="md-settings"></ion-icon>
+    </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-item *ngFor="let item of items" (click)="presentActionSheet()">
+  <ion-item *ngFor="let item of items">
     <ion-item class="item">Medication Name: {{ item.med }}</ion-item>
     <ion-item class="item">Dosage: {{ item.dose }} Every {{ item.frq }} Hours</ion-item>
   </ion-item>
