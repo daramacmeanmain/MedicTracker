@@ -1,7 +1,8 @@
 <?php
-	session_start();
+	session_start()//user session
 	header('Access-Control-Allow-Origin: *');
 	
+	//database parameters
 	$hn 		= 'localhost';
 	$un 		= 'root';
 	$pwd		= '';
@@ -24,6 +25,7 @@
 	$pdo 	= new PDO($dsn, $un, $pwd, $opt);
 	$data   = array();
 	
+	//set session variables
 	if (isset($_REQUEST['username'])){
 		$_SESSION['session_username'] = $_REQUEST['username'];
 	}
@@ -40,6 +42,7 @@
 		$password = $_SESSION['session_password'];
 	}
 	
+	//execute query
 	try {
 	  $stmt 	= $pdo->query("select med_table.med, med_table.dose, round(12/med_table.frq) as frq from user_table inner join med_table on med_table.user_id = user_table.id where user_table.username = '$username' and user_table.password = '$password'");
 	  while($row  = $stmt->fetch(PDO::FETCH_OBJ))

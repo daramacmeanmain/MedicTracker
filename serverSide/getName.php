@@ -1,8 +1,8 @@
 <?php
-	session_start();
+	session_start();//user session
 	header('Access-Control-Allow-Origin: *');
 	
-	// Define database connection parameters
+	//database parameters
 	$hn 		= 'localhost';
 	$un 		= 'root';
 	$pwd		= '';
@@ -25,6 +25,7 @@
 	$pdo 	= new PDO($dsn, $un, $pwd, $opt);
 	$data   = array();
 	
+	//set session variables
 	if (isset($_REQUEST['username'])){
 		$_SESSION['session_username'] = $_REQUEST['username'];
 	}
@@ -41,6 +42,7 @@
 		$password = $_SESSION['session_password'];
 	}
 	
+	//execute query
 	try {
 	  $stmt 	= $pdo->query("select name from user_table where username = '$username' and password = '$password'");
 	  while($row  = $stmt->fetch(PDO::FETCH_OBJ))

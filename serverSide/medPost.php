@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	session_start();//user session
 	header('Access-Control-Allow-Origin: *');
 
 	$hn 		= 'localhost';
@@ -19,11 +19,13 @@
 
 	$data 	= array();
 
+	//retrieve form data
 	$med = filter_var($_REQUEST['med'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	$dose = filter_var($_REQUEST['dose'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	$frq = filter_var($_REQUEST['frq'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	$uid = filter_var($_REQUEST['uid'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	
+	//execute query
 	try {
 		$sql 	= "insert into med_table (med, dose, frq, user_id) values (:med, :dose, :frq, :uid)";
 		$stmt 	= $pdo->prepare($sql);

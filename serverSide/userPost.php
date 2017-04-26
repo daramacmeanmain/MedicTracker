@@ -1,6 +1,7 @@
 <?php
 	header('Access-Control-Allow-Origin: *');
 
+	//define parameters
 	$hn 		= 'localhost';
 	$un 		= 'root';
 	$pwd		= '';
@@ -18,10 +19,12 @@
 
 	$data 	= array();
 
+	//retrieve form data
 	$name = filter_var($_REQUEST['name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	$username = filter_var($_REQUEST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	$password = filter_var($_REQUEST['password'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
 	
+	//execute query
 	try {
 		$sql 	= "INSERT INTO user_table(name, username, password) VALUES(:name, :username, :password)";
 		$stmt 	= $pdo->prepare($sql);
