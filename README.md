@@ -45,3 +45,7 @@ To delete a prescription, input the name of the medication you with to delete an
 ![options](http://i.imgur.com/mn8PRz7.png)  ![edit-pre](http://i.imgur.com/z4TCfJl.png)  ![del-pre](http://i.imgur.com/lw83X74.png)
 
 When you're finished, you can open the options menu again and tap Logout to end the session and return to the main screen. To exit the app, hit the back button on your device and the app will close.
+
+
+## Video Demonstration
+A short video demonstration of my project can be found [here](https://www.youtube.com/watch?v=1qiPondt-BQ).
