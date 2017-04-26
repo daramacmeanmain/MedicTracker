@@ -16,6 +16,7 @@ import { Page1 } from  '../page1/page1';
 })
 export class UserProfilePage {
 
+//Initialise variables
   public items: any = [];
   public uItems: any = [];
   public idItems: any = [];
@@ -29,15 +30,17 @@ export class UserProfilePage {
   private baseURI : String  = "http://51.141.24.34/"; 
 
   constructor(public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    this.userName = this.navParams.get('username');
-    this.userId = this.navParams.get('uid');
+    this.userName = this.navParams.get('username'); //retrieve username for passing in app
+    this.userId = this.navParams.get('uid'); // retrieve id
   }
 
+//calling load functions
   ionViewWillEnter(){
       this.load();
       this.loadName();
    }
 
+//get profile data from the server
    load(){
      this.http.get('http://51.141.24.34/login.php')
       .map(res => res.json())
@@ -47,6 +50,7 @@ export class UserProfilePage {
       });
    }
 
+//call the session_destroy() function on the server and end the user session
    logout(){
      this.http.get('http://51.141.24.34/logout.php')
       .map(res => res.json())
@@ -54,6 +58,7 @@ export class UserProfilePage {
       {});
    }
 
+//retrieve the user's name to display in the navbar
    loadName(){
      this.http.get('http://51.141.24.34/getName.php')
       .map(res => res.json())
@@ -62,6 +67,7 @@ export class UserProfilePage {
          this.uItems = data;
       });
    }
+
 
    loadId(){
      this.http.get('http://51.141.24.34/getUid.php')
@@ -75,6 +81,7 @@ export class UserProfilePage {
       });
    }
 
+//post request for edit funciton
    editMed(med, nMed, dose, frq, username, uid)
   {
     let body: String = "key=create&med=" + med + "&nMed=" + nMed + "&dose=" + dose + "&frq=" + frq + "&username=" + username + "&uid=" + uid,
@@ -89,6 +96,7 @@ export class UserProfilePage {
     
   }
 
+//post request for delete function
   delMed(med, username, uid)
   {
     let body: String = "key=create&med=" + med + "&username=" + username + "&uid=" + uid,
@@ -113,6 +121,7 @@ export class UserProfilePage {
       this.userId = item.uid;
    }
 
+//open action sheet for options
    presentActionSheet(){
      let actionSheet = this.actionSheetCtrl.create({
        title: 'What would you like to do?',
@@ -156,6 +165,7 @@ export class UserProfilePage {
     actionSheet.present();
    }
 
+//open edit alert
    presentEdit() {
       let editAlert = this.alertCtrl.create({
       title: 'Edit',
@@ -170,10 +180,12 @@ export class UserProfilePage {
         },
         {
           name: 'dEdit',
+          type: 'number',
           placeholder: 'Dosage'
         },
         {
           name: 'fEdit',
+          type: 'number',
           placeholder: 'Number of Times per Day'
         }
       ],
@@ -195,8 +207,8 @@ export class UserProfilePage {
                   username: string = this.userName,
                   uid: string = this.userId
 
-                  this.editMed(med, nMed, dose, frq, username, uid);
-                  this.navCtrl.push(UserProfilePage, {username});
+                  this.editMed(med, nMed, dose, frq, username, uid);//pass the data into the post method for edit
+                  this.navCtrl.push(UserProfilePage, {username});//push to reload the page and pass the username with is
           }
         }
       ]
@@ -206,6 +218,7 @@ export class UserProfilePage {
 
    }
 
+//show delete alert
     presentDelete() {
       let delAlert = this.alertCtrl.create({
       title: 'Delete',
@@ -230,8 +243,8 @@ export class UserProfilePage {
                username: string = this.userName,
                uid: string = this.userId
 
-               this.delMed(med, username, uid);
-               this.navCtrl.push(UserProfilePage, {username});
+               this.delMed(med, username, uid);//pass data to the post method for delete
+               this.navCtrl.push(UserProfilePage, {username});//reload page / pass username
           }
         },
       ]

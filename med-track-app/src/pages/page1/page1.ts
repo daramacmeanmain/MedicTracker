@@ -22,12 +22,15 @@ export class Page1 {
   userProfile = UserProfilePage;
   
   public items: any = [];
+
+  //get username and password from the form
   constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder) {
     this.form = fb.group({
       "username": [""],
       "password": [""]
     })
     
+    //allow the back button on android device to close the app
     platform.registerBackButtonAction(() => {
         this.platform.exitApp();
     });
@@ -38,6 +41,7 @@ export class Page1 {
     this.userPassword = item.password;
   }
 
+//post request for logging in
    logInUser(username, password)
   {
     let body: String = "key=create&username=" + username + "&password=" + password,
@@ -54,8 +58,8 @@ export class Page1 {
     let username : string	= this.form.controls["username"].value,
         password : string	= this.form.controls["password"].value;
 
-    this.logInUser(username, password);
-    this.navCtrl.push(UserProfilePage, {username});
+    this.logInUser(username, password);//pass data to post request
+    this.navCtrl.push(UserProfilePage, {username});//push to the profile page, pass username with it
   }
 
 }

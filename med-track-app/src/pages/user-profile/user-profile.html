@@ -8,7 +8,7 @@
   <ion-navbar hideBackButton>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </button> <!-- get the user's name' -->
     <ion-row *ngFor="let uItem of uItems">
         <ion-title>{{ uItem.name }}'s Profile</ion-title>
     </ion-row>
@@ -21,7 +21,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding><!-- profile page content, display prescriptions -->
   <ion-item *ngFor="let item of items">
     <ion-item class="item">Medication Name: {{ item.med }}</ion-item>
     <ion-item class="item">Dosage: {{ item.dose }} Every {{ item.frq }} Hours</ion-item>

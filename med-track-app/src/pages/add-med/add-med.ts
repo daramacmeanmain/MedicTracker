@@ -27,6 +27,7 @@ export class AddMedPage {
 
   userProfile = UserProfilePage;
   
+  //get form data
   constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder) {
     this.form = fb.group({
       "med": [""],
@@ -36,10 +37,12 @@ export class AddMedPage {
     })
   }
 
+//call get method
   ionViewWillEnter(){
       this.loadId();
    }
 
+//get the user id for form
   loadId(){
      this.http.get('http://51.141.24.34/getUid.php')
       .map(res => res.json())
@@ -49,6 +52,7 @@ export class AddMedPage {
       });
    }
 
+//post request for adding medication
   createMed(med, dose, frq, uid)
   {
     let body: String = "key=create&med=" + med + "&dose=" + dose + "&frq=" + frq + "&uid=" + uid,
@@ -77,12 +81,8 @@ export class AddMedPage {
 
     //console.log(this.loadId().userId);
 
-    this.createMed(med, dose, frq, uid);
-    this.navCtrl.push(UserProfilePage, {uid});
-  }
-
-  reload(){
-     
+    this.createMed(med, dose, frq, uid);//pass data to post request
+    this.navCtrl.push(UserProfilePage, {uid});//push to the profile, pass user id
   }
 
   ionViewDidLoad() {

@@ -31,7 +31,7 @@
        <ion-input type="number" placeholder="Number of Times per Day" formControlName="frq" [(ngModel)]="medFrq"></ion-input>
     </ion-item>
 
-    <ion-item *ngFor="let item of items">
+    <ion-item *ngFor="let item of items"><!-- get the user id to pass to the post request -->
         <ion-select placeholder="Confirm ID" formControlName="uid" [(ngModel)]="userId">
           <ion-option>{{ item.id }}</ion-option>
         </ion-select>

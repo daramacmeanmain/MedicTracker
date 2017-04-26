@@ -16,9 +16,9 @@ export class Page2 {
   public uName : any;
   public userName : any;
   public userPass : any;
-  //public userConfirm : any;
   private baseURI : String  = "http://51.141.24.34/";
 
+//get form data
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public fb: FormBuilder, public modalCtrl: ModalController) {
     this.form = fb.group({
       "name": [""],
@@ -27,14 +27,6 @@ export class Page2 {
     })
   }
 
-  /*addMedication(){
-    let addMedModal = this.modalCtrl.create(AddMedPage);  
-    addMedModal.present();
-    addMedModal.onDidDismiss(data=>{
-        console.log("Data =>", data)
-    })
-  }*/
-
   setUser(item)
    {
       this.uName = item.name;
@@ -42,6 +34,7 @@ export class Page2 {
       this.userPass = item.password;
    }
 
+//post request for user creation
    createUser(name, username, password)
   {
     let body: String = "key=create&name=" + name + "&username=" + username + "&password=" + password,
@@ -60,14 +53,7 @@ export class Page2 {
         username : string	= this.form.controls["username"].value,
         password : string	= this.form.controls["password"].value;
 
-        this.createUser(name, username, password);
+        this.createUser(name, username, password);//pass data to post request
         this.navCtrl.push(Page1);
   }
-
-  /*itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(Page2, {
-      item: item
-    });*/
-  //}
 }
