@@ -30,13 +30,13 @@ I would recommend exporting to Android instead of running via `ionic serve`, as 
 
 To use the features of this app, you must first create a profile by tapping the "CREATE PROFILE" button on the launch screen. This will bring you to a form which will allow you to enter your profile details. Fillout the form and tap continue
 
-![create-profile](http://i.imgur.com/FJEsajG.png)
+![create-profile](http://i.imgur.com/mqZ8gvc.png)
 
 You will then be returned to the home screen where you can enter the username and password you created to log in. Type in your credentials and tap "LOG IN".  
 Once in the profile page, tapping the button in the top left corner will open a side menu, from which you can tap "Add Prescription" to add a new prescription to your profile.  
 To add a new prescription, fill out the form with the relevant details, then tap "Confirm ID". An alert will pop up along with a number. Tap the number and hit OK, then tap FINISH to continue and return to the user profile.
 
-![add-pre](http://i.imgur.com/fZw75mp.png)
+![add-pre](http://i.imgur.com/9dwAEbK.png)
 
 The profile page should now display the new prescription you just added. In the top right corner is an options menu. Tap that to bring up the option to either edita prescription, delete a prescription or log out.  
 To edit a prescription, input the name of the medication you with to modify, then input the updated details and select CONFIRM.  
